@@ -12,20 +12,30 @@ def main():
     
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
+    
+    
+    updatable = pg.sprite.Group()
+    drawable = pg.sprite.Group()
+    
+    Player.containers = (updatable, drawable)
     player = Player(x, y, PLAYER_RADIUS)
 
     while (True):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-
-        black = (0, 0, 0)
-        screen.fill(black)
+     
+        for obj in updatable:
+            obj.update(dt)
         
-        player.update(dt)
-        player.draw(screen)
+        screen.fill("black")
+            
+        for obj in drawable:
+            obj.draw(screen)
         
         pg.display.flip()
+        
+        # limit framerate
         dt = clock.tick(FPS) / 1000
     
 
