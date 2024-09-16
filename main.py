@@ -1,6 +1,8 @@
 import pygame as pg
 from constants import *
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 
 
@@ -16,17 +18,24 @@ def main():
     
     updatable = pg.sprite.Group()
     drawable = pg.sprite.Group()
+    asteroids = pg.sprite.Group()
     
     Player.containers = (updatable, drawable)
     player = Player(x, y, PLAYER_RADIUS)
-
+    
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
+    asteroid_field = AsteroidField()
+    
+    
     while (True):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-     
+      
         for obj in updatable:
             obj.update(dt)
+            
         
         screen.fill("black")
             
