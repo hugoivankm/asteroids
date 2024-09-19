@@ -1,9 +1,10 @@
 import pygame as pg
+import sys
 from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
-
+from circleshape import CircleShape
 
 
 def main():
@@ -32,10 +33,15 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-      
+     
         for obj in updatable:
             obj.update(dt)
-            
+        
+        for asteroid in asteroids:
+            if asteroid.is_colliding(player):
+                print("Game Over!")
+                sys.exit(0)
+                return        
         
         screen.fill("black")
             
