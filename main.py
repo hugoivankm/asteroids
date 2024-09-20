@@ -4,7 +4,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
-from circleshape import CircleShape
+from shot import Shot
 
 
 def main():
@@ -20,6 +20,7 @@ def main():
     updatable = pg.sprite.Group()
     drawable = pg.sprite.Group()
     asteroids = pg.sprite.Group()
+    shots = pg.sprite.Group()
     
     Player.containers = (updatable, drawable)
     player = Player(x, y, PLAYER_RADIUS)
@@ -27,6 +28,8 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
     asteroid_field = AsteroidField()
+    
+    Shot.containers = (shots, updatable, drawable)
     
     
     while (True):
