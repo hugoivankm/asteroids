@@ -32,7 +32,7 @@ def main():
     Shot.containers = (shots, updatable, drawable)
     
     
-    while (True):
+    while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
@@ -44,7 +44,11 @@ def main():
             if asteroid.is_colliding(player):
                 print("Game Over!")
                 sys.exit(0)
-                return        
+                return
+            for shot in shots:
+                if asteroid.is_colliding(shot):
+                    asteroid.kill()
+                    shot.kill()        
         
         screen.fill("black")
             
